@@ -51,16 +51,17 @@ const config: runtime.GetPrismaClientConfig = {
     "db"
   ],
   "activeProvider": "sqlite",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": null,
-        "value": "file:dev.db"
+        "value": "file:../dev.db"
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider      = \"prisma-client\"\n  output        = \"../src/model/prisma\"\n  binaryTargets = [\"native\", \"rhel-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  // url      = env(\"DATABASE_URL\")\n  url      = \"file:dev.db\"\n}\n\nmodel Profile {\n  id   Int     @id @default(autoincrement())\n  name String?\n}\n",
-  "inlineSchemaHash": "189080311ab83e903944dc218304e5fbe888d825f66a1cb9045320922ceab1e1",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider      = \"prisma-client\"\n  output        = \"../src/model/prisma\"\n  binaryTargets = [\"native\", \"rhel-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  // url      = env(\"DATABASE_URL\")\n  url      = \"file:../dev.db\"\n}\n\nmodel Profile {\n  id   Int     @id @default(autoincrement())\n  name String?\n}\n",
+  "inlineSchemaHash": "cd109d990ad56368dceda2aee9ad20970efd807a95abe6e88a16881d807a9360",
   "copyEngine": true,
   "runtimeDataModel": {
     "models": {},
