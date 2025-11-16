@@ -2,15 +2,14 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider   = "prisma-client"
-  output     = "../src/model/prisma"
-  engineType = "client" // no Rust engine
+  provider = "prisma-client"
+  output   = "src/model/prisma"
 }
 
 datasource db {
   provider = "sqlite"
   // url      = env("DATABASE_URL")
-  url      = "file:../dev.db"
+  url      = "file:dev.db"
 }
 
 model Profile {
