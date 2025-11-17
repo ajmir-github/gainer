@@ -9,7 +9,7 @@ app.get("/", async (request, response) => {
 });
 
 app.get("/create", async (request, response) => {
-  const newUser = await createUser({});
+  // const newUser = await createUser({});
 });
 
 app.listen(Port, () => {
