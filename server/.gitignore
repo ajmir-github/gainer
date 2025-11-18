@@ -23,8 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 
-/src/generated/prisma
 
-/prisma/src/prismaClient
 
 /src/prisma
+
+.env

@@ -17,11 +17,11 @@ enum Role {
 
 model User {
   id       String    @id @unique @default(uuid())
-  email    String    @unique
+  phone    String    @unique // for login
   password String
-  name     String
-  phone    String    @unique
-  address  String
+  email    String?   @unique
+  name     String?
+  address  String?
   role     Role      @default(USER)
   // Relationships
   orders   Order[]
@@ -70,6 +70,7 @@ enum Status {
   PREPARING
   SHIPPED
   DELIVERD
+  CANCELLED
 }
 
 model Order {
