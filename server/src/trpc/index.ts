@@ -1,24 +1,8 @@
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
-import { createContext } from "./trpcContext";
-import { router, publicProcedure } from "./trpcRouters";
-import z from "zod";
+import { createContext } from "./context";
+import { router, procedure } from "./router";
 
-const appRouter = router({
-  userList: publicProcedure
-    .input(
-      z.object({
-        limit: z.number(),
-      })
-    )
-    .query(async ({ ctx, input }) => {
-      console.log("Request made!");
-      return {
-        data: [1, 2, 3],
-        input,
-        auth: ctx.getAuthToken(),
-      };
-    }),
-});
+const appRouter = router({});
 
 const trpc = createExpressMiddleware({
   router: appRouter,

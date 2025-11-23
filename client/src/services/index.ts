@@ -3,9 +3,7 @@ import type AppRouter from "../../../server/src";
 import { SERVER_URL } from "../constants";
 
 function getAuthToken() {
-  const token = localStorage.getItem("AUTH");
-  if (token) return `Bearer ${token}`;
-  return "";
+  return localStorage.getItem("AUTH") || "";
 }
 
 console.log(SERVER_URL);
