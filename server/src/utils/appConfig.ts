@@ -1,3 +1,4 @@
+import { CorsOptions } from "cors";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -9,5 +10,9 @@ function validateEnv(name: string, defaultValue?: string) {
   return defaultValue;
 }
 
+export const DatabaseURL = validateEnv("DATABASE_URL");
 export const ClientURL = validateEnv("CLIENT_URL");
 export const Port = validateEnv("PORT", "3000");
+export const CorsOption: CorsOptions = {
+  origin: ClientURL,
+};

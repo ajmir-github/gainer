@@ -1,22 +1,25 @@
 import { createTRPCClient, httpBatchLink } from "@trpc/client";
 import type AppRouter from "../../../server/src";
+import { SERVER_URL } from "../constants";
 
-function getAuthCookie() {
-  return "Bearer xxx";
+function getAuthToken() {
+  const token = localStorage.getItem("AUTH");
+  if (token) return `Bearer ${token}`;
+  return "";
 }
 
-const Server = createTRPCClient<AppRouter>({
+console.log(SERVER_URL);
+
+export const Server = createTRPCClient<AppRouter>({
   links: [
     httpBatchLink({
-      url: "http://localhost:3000/trpc",
+      url: `${SERVER_URL}/trpc`,
       // You can pass any HTTP headers you wish here
       async headers() {
         return {
-          authorization: getAuthCookie(),
+          authorization: getAuthToken(),
         };
       },
     }),
   ],
 });
-
-export default Server;

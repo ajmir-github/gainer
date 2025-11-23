@@ -11,10 +11,11 @@ const appRouter = router({
       })
     )
     .query(async ({ ctx, input }) => {
+      console.log("Request made!");
       return {
         data: [1, 2, 3],
         input,
-        v: ctx.v,
+        auth: ctx.getAuthToken(),
       };
     }),
 });
