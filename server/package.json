@@ -18,11 +18,16 @@
     "@types/chance": "^1.1.7",
     "@types/express": "^5.0.5",
     "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^24.10.1",
     "chance": "^1.1.13",
     "nodemon": "^3.1.11",
+    "prisma": "6.19",
+    "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "@prisma/client": "6.19",
+    "@trpc/server": "^11.7.1",
     "bcryptjs": "^3.0.3",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
