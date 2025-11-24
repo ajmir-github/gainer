@@ -1,8 +1,13 @@
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { createContext } from "./context";
-import { router, procedure } from "./router";
+import { router } from "./router";
+import UserRouter from "./UserRouter";
+import authRoutes from "./authRouter";
 
-const appRouter = router({});
+const appRouter = router({
+  auth: authRoutes,
+  user: UserRouter,
+});
 
 const trpc = createExpressMiddleware({
   router: appRouter,

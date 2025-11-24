@@ -8,18 +8,7 @@ import {
   signToken,
 } from "../services/authService";
 
-export const authRouter = router({
-  // Get current user (requires auth)
-  self: procedure
-    .meta({
-      roles: [UserRole.USER, UserRole.ADMIN, UserRole.EMPLOYEE],
-    })
-    .query(async ({ ctx }) => {
-      const auth = ctx.getAuth();
-      const user = await ctx.prisma.user.findUnique({ where: { id: auth.id } });
-      return user;
-    }),
-
+const authRouter = router({
   // Register new user
   register: procedure
     .input(
@@ -29,8 +18,8 @@ export const authRouter = router({
         name: z.string(),
       })
     )
-    .mutation(async ({ input, ctx }) => {
-      const existing = await ctx.prisma.user.findUnique({
+    .mutation(async ({ input, ctx: { database } }) => {
+      const existing = await database.user.findUnique({
         where: { email: input.email },
       });
       if (existing) {
@@ -41,7 +30,7 @@ export const authRouter = router({
       }
 
       const hashed = hashPassword(input.password);
-      const user = await ctx.prisma.user.create({
+      const user = await database.user.create({
         data: {
           email: input.email,
           password: hashed,
@@ -51,7 +40,6 @@ export const authRouter = router({
       });
 
       const token = signToken(user.id, user.role);
-
       return { token, user };
     }),
 
@@ -63,8 +51,8 @@ export const authRouter = router({
         password: z.string(),
       })
     )
-    .mutation(async ({ input, ctx }) => {
-      const user = await ctx.prisma.user.findUnique({
+    .mutation(async ({ input, ctx: { database } }) => {
+      const user = await database.user.findUnique({
         where: { email: input.email },
       });
       if (!user) {
@@ -83,19 +71,6 @@ export const authRouter = router({
 
       return { token, user };
     }),
-
-  // Example admin-only action
-  create: procedure
-    .meta({ roles: [UserRole.ADMIN] })
-    .input(
-      z.object({
-        email: z.email(),
-        password: z.string().min(6).transform(hashPassword),
-        name: z.string(),
-        role: z.enum(UserRole),
-      })
-    )
-    .mutation(async ({ input, ctx }) => {
-      return ctx.prisma.user.create({ data: input });
-    }),
 });
+
+export default authRouter;

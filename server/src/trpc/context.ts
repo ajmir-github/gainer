@@ -5,14 +5,14 @@ import prisma, { UserRole } from "../prisma";
 
 export const createContext = ({ req, res }: CreateExpressContextOptions) => {
   // this is accessbile in every router
-  const cache: { auth?: { id: string; role: UserRole } } = {};
+  let cachedAuth: { id: string; role: UserRole } | null = null;
 
   function getAuthOptionally() {
-    if (cache.auth) return cache.auth;
+    if (cachedAuth) return cachedAuth;
     if (req.headers.authorization) {
       const token = req.headers.authorization.replace("Bearer ", "");
       try {
-        cache.auth = verifyToken(token);
+        cachedAuth = verifyToken(token);
       } catch (error: any) {
         // has token but invalid one
         throw new TRPCError({
@@ -20,7 +20,7 @@ export const createContext = ({ req, res }: CreateExpressContextOptions) => {
           message: error.message,
         });
       }
-      return cache.auth;
+      return cachedAuth;
     }
     return null;
   }
@@ -36,7 +36,7 @@ export const createContext = ({ req, res }: CreateExpressContextOptions) => {
   }
 
   return {
-    prisma,
+    database: prisma,
     getAuth,
     getAuthOptionally,
   };
