@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "nodemon --watch src/ src/index.ts"
+    "dev": "nodemon --watch src/ src/index.ts",
+    "test": "nodemon --watch src/ src/test.ts"
   },
   "keywords": [],
   "author": "",
