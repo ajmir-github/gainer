@@ -1,33 +1,35 @@
-import { createExpressMiddleware } from "@trpc/server/adapters/express";
-import UserRouter from "./UserRouter";
-import ProductRouter from "./ProductRouter";
-import AuthRouter from "./AuthRouter";
-import ReviewRouter from "./ReviewRouter";
-import OrderRouter from "./OrderRouter";
-import OrderItemRouter from "./OrderItemRouter";
+import {
+	type CreateExpressContextOptions,
+	createExpressMiddleware,
+} from "@trpc/server/adapters/express";
 import * as encryption from "../libs/encryption";
 import * as Database from "../models";
-import { CreateExpressContextOptions } from "@trpc/server/adapters/express";
+import AuthRouter from "./AuthRouter";
 import { router } from "./core";
+import OrderItemRouter from "./OrderItemRouter";
+import OrderRouter from "./OrderRouter";
+import ProductRouter from "./ProductRouter";
+import ReviewRouter from "./ReviewRouter";
+import UserRouter from "./UserRouter";
 
 const createContext = ({ req, res }: CreateExpressContextOptions) => {
-  return {
-    encryption,
-    Database,
-  };
+	return {
+		encryption,
+		Database,
+	};
 }; // no context
 export type Context = ReturnType<typeof createContext>;
 
 export const appRouter = router({
-  auth: AuthRouter,
-  user: UserRouter,
-  product: ProductRouter,
-  review: ReviewRouter,
-  order: OrderRouter,
-  OrderItemRouter,
+	auth: AuthRouter,
+	user: UserRouter,
+	product: ProductRouter,
+	review: ReviewRouter,
+	order: OrderRouter,
+	OrderItemRouter,
 });
 
 export const trpcApp = createExpressMiddleware({
-  router: appRouter,
-  createContext,
+	router: appRouter,
+	createContext,
 });

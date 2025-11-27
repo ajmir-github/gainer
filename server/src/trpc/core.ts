@@ -1,14 +1,15 @@
-import { initTRPC, TRPCError } from "@trpc/server";
+import { initTRPC } from "@trpc/server";
 import superjson from "superjson";
-import { Context } from ".";
+import type { UserRole } from "../models";
+import type { Context } from ".";
 
 type Meta = {
-  authRequired?: boolean;
-  roleRequired?: any[];
+	authRequired?: boolean;
+	roleRequired?: UserRole[];
 };
 
 export const trpcRoot = initTRPC.context<Context>().meta<Meta>().create({
-  transformer: superjson,
+	transformer: superjson,
 });
 export const router = trpcRoot.router;
 export const procedure = trpcRoot.procedure;
