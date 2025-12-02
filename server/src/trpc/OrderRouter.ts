@@ -1,4 +1,4 @@
-import { procedure, router } from "./core";
+import { procedure, router } from "../trpcConfig";
 
 // order and order item
 const OrderRouter = router({
