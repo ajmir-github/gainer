@@ -1,9 +1,7 @@
 import { procedure, router } from "../trpcConfig";
 
-const CategoryRouter = router({
+export default router({
   test: procedure.query(() => {
     return [1, 2];
   }),
 });
-
-export default CategoryRouter;

@@ -1,8 +1,3 @@
-export enum UserRole {
-  ADMIN = "ADMIN",
-  USER = "USER",
-}
-
 export enum OrderStatus {
   PREPARING = "PREPARING",
   SHIPPED = "SHIPPED",
@@ -11,17 +6,6 @@ export enum OrderStatus {
 }
 
 export type WithId<Model> = { id: string } & Model;
-
-export interface BaseUser {
-  email: string;
-  password: string;
-  name: string;
-  phone?: string;
-  address?: string;
-  role: UserRole;
-  createdAt: Date;
-}
-export type User = WithId<BaseUser>;
 
 export interface BaseCategory {
   name: string;
@@ -76,3 +60,22 @@ export interface BaseOrderItem {
 }
 
 export type OrderItem = WithId<BaseOrderItem>;
+
+export enum Collections {
+  Users = "Users",
+  Categories = "Categories",
+  Products = "Products",
+  Reviews = "Reviews",
+  Orders = "Orders",
+  OrderItems = "OrderItems",
+}
+
+export const Categories = database.collection<BaseCategory>(
+  Collections.Categories
+);
+export const Products = database.collection<BaseProduct>(Collections.Products);
+export const Reviews = database.collection<BaseReview>(Collections.Reviews);
+export const Orders = database.collection<BaseOrder>(Collections.Orders);
+export const OrderItems = database.collection<BaseOrderItem>(
+  Collections.OrderItems
+);

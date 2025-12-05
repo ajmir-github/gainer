@@ -1,26 +1,24 @@
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
-import AuthRouter from "./trpc/AuthRouter";
-import OrderItemRouter from "./trpc/OrderItemRouter";
-import OrderRouter from "./trpc/OrderRouter";
-import ProductRouter from "./trpc/ProductRouter";
-import ReviewRouter from "./trpc/ReviewRouter";
-import UserRouter from "./trpc/UserRouter";
+import auth from "./controllers/auth";
+import order from "./controllers/order";
+import orderItem from "./controllers/orderItem";
+import product from "./controllers/product";
+import review from "./controllers/review";
+import user from "./controllers/user";
 import { createContext, router } from "./trpcConfig";
 
 const appRouter = router({
-  auth: AuthRouter,
-  user: UserRouter,
-  product: ProductRouter,
-  review: ReviewRouter,
-  order: OrderRouter,
-  OrderItemRouter,
+  auth,
+  user,
+  product,
+  review,
+  order,
+  orderItem,
 });
 
-const trpcApp = createExpressMiddleware({
+export default createExpressMiddleware({
   router: appRouter,
   createContext,
 });
 
 export type AppRouter = typeof appRouter;
-
-export default trpcApp;

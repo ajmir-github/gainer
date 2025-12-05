@@ -1,10 +1,7 @@
 import { procedure, router } from "../trpcConfig";
 
-// auth and user
-const ReviewRouter = router({
+export default router({
   test: procedure.query(() => {
     return [1, 2];
   }),
 });
-
-export default ReviewRouter;

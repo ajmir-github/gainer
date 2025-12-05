@@ -1,5 +1,5 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
-import { DatabaseURL } from "../constants";
+import { DatabaseURL } from "./constants";
 
 export const client = new MongoClient(DatabaseURL, {
   serverApi: {

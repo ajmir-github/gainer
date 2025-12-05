@@ -1,10 +1,7 @@
 import { procedure, router } from "../trpcConfig";
 
-// order and order item
-const OrderRouter = router({
+export default router({
   test: procedure.query(() => {
     return [1, 2];
   }),
 });
-
-export default OrderRouter;
