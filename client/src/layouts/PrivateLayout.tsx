@@ -1,7 +1,7 @@
-import Navbar from "./Navbar";
-import Tweet from "./Tweet";
+import { Outlet } from "react-router";
+import Navbar from "../components/Navbar";
 
-export default function Layout() {
+export default function PrivateLayout() {
   return (
     <div className="bg-slate-200 min-h-dvh flex justify-center p-4">
       <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 grow max-w-5xl gap-4">
@@ -9,21 +9,7 @@ export default function Layout() {
           <Navbar />
         </div>
         <div className="feed col-span-1 sm:col-span-2 grow rounded-xl border border-gray-300 overflow-clip grid grid-cols-1 gap-0.5">
-          <Tweet />
-          <Tweet />
-          <Tweet />
-          <Tweet />
-          <Tweet />
-          <Tweet />
-          <Tweet />
-          <Tweet />
-          <Tweet />
-          <Tweet />
-          <Tweet />
-          <Tweet />
-          <Tweet />
-          <Tweet />
-          <Tweet />
+          <Outlet />
         </div>
         <div className="col-span-1 sm:col-span-2 md:col-span-1 bg-white rounded-xl border border-gray-300 p-4">
           <div>right</div>

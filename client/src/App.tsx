@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router";
-import Layout from "./components/Layout";
+import PrivateLayout from "./layouts/PrivateLayout";
+import PublicLayout from "./layouts/PublicLayout";
 import CartPage from "./routes/cart";
 import HomePage from "./routes/home";
 import LoginPage from "./routes/login";
@@ -11,15 +12,17 @@ import RegisterPage from "./routes/register";
 function App() {
   return (
     <Routes>
-      <Route element={<Layout />}>
+      <Route element={<PrivateLayout />}>
         <Route index element={<HomePage />} />
         <Route path="profile" element={<CartPage />} />
         <Route path="notification" element={<ProductsPage />} />
         <Route path="hashtag" element={<ProductPage />} />
+      </Route>
+      <Route element={<PublicLayout />}>
         <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<RegisterPage />} />
-        <Route path="*" element={<NotFoundPage />} />
       </Route>
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }
