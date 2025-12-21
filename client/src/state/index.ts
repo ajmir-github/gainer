@@ -1,22 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
-import cartSlice, { localCart } from "./userSlice";
+import authSlice from "./authSlice";
 
 // export the actions
 export const actions = {
-  cart: cartSlice.actions,
+  auth: authSlice.actions,
 };
 
 // register the reducers
 export const store = configureStore({
   reducer: {
-    cart: cartSlice.reducer,
+    auth: authSlice.reducer,
   },
-});
-
-store.subscribe(() => {
-  const { cart } = store.getState();
-  localCart.set(cart);
 });
 
 // Infer the `RootState`,  `AppDispatch`, and `AppStore` types from the store itself

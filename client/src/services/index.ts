@@ -1,13 +1,7 @@
 import { createTRPCClient, httpBatchLink } from "@trpc/client";
-import superjson from "superjson";
 import type AppRouter from "../../../server";
 import { SERVER_URL } from "../constants";
-
-function getAuthToken() {
-  return localStorage.getItem("AUTH") || "";
-}
-
-console.log(SERVER_URL);
+import LocalToken from "../utils/LocalToken";
 
 export const Server = createTRPCClient<AppRouter>({
   links: [
@@ -16,10 +10,12 @@ export const Server = createTRPCClient<AppRouter>({
       // You can pass any HTTP headers you wish here
       async headers() {
         return {
-          authorization: getAuthToken(),
+          authorization: LocalToken.get(),
         };
       },
-      transformer: superjson,
+      // transformer: superjson,
     }),
   ],
 });
+
+export type { AppRouter };

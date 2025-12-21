@@ -21,7 +21,7 @@ model User {
   updatedAt DateTime @updatedAt
 
   // Relations
-  profileId             String         @unique
+  profileId             String?        @unique
   profile               Profile?
   // others
   tweets                Tweet[]
